@@ -1,7 +1,8 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-int WIDTH =20, HEIGHT=20;
-int grid[100][100];
+int WIDTH =30, HEIGHT=30;
+int grid[30][30];
 
 
 int initGame(void){
@@ -14,7 +15,6 @@ int initGame(void){
 
 int loadGame(int motif){
   if(motif == 1){
-    printf("%d %d", HEIGHT, WIDTH );
     grid[HEIGHT/2][WIDTH/2] = 1;
     grid[HEIGHT/2][(WIDTH/2)+1] = 1;
     grid[HEIGHT/2][(WIDTH/2)+2] = 1;
@@ -25,6 +25,10 @@ int loadGame(int motif){
 }
 
 void drawGame(void){
+    //system("clear");
+    for(int i=0; i<HEIGHT+1; i++){
+      printf("-");
+    }
     for(int i=0; i<HEIGHT; i++){
       for(int j=0; j<WIDTH; j++){
         if(grid[i][j] == 1)
@@ -32,7 +36,10 @@ void drawGame(void){
         else
           printf(" ");
       }
-      printf("\n");
+      printf("|\n|");
+    }
+    for(int i=0; i<HEIGHT+1; i++){
+      printf("-");
     }
 }
 
@@ -78,13 +85,19 @@ void UpdateGame(void){
   for(int i=0; i<HEIGHT; i++){
     for(int j=0; j<WIDTH; j++){
       int voisin = NbCasseAdj(i, j);
-      if(grid[i][j] == 1 && voisin > 1 && voisin <4)
-        grid2[i][j] = 1;
-      if(voisin == 3)
-        grid2[i][j] = 1;
+      if(grid[i][j] == 1 && voisin > 1 && voisin <4){
+        grid2[i][j] = 1;}
+      if(grid[i][j] == 0 && voisin == 3){
+        grid2[i][j] = 1;}
+      else {
+      grid2[i][j] = 0;}
     }
   }
-  grid[HEIGHT][WIDTH] = grid2[HEIGHT][WIDTH];
+  for(int i=0; i<HEIGHT; i++){
+    for(int j=0; j<WIDTH; j++)
+      grid[i][j] = grid2[i][j];
+  }
+
   }
 
 void PlayGame(void){
