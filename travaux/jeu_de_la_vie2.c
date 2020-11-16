@@ -26,19 +26,22 @@ int loadGame(int motif){
 
 void drawGame(void){
     //system("clear");
-    for(int i=0; i<HEIGHT+1; i++){
+    printf("\n");
+    for(int i=0; i<HEIGHT+2; i++){
       printf("-");
     }
+    printf("\n");
     for(int i=0; i<HEIGHT; i++){
+      printf("|");
       for(int j=0; j<WIDTH; j++){
         if(grid[i][j] == 1)
           printf("#");
         else
           printf(" ");
       }
-      printf("|\n|");
+    printf("|\n");
     }
-    for(int i=0; i<HEIGHT+1; i++){
+    for(int i=0; i<HEIGHT+2; i++){
       printf("-");
     }
 }
@@ -56,7 +59,7 @@ int NbCasseAdj(int ligne, int colonne){
   if(grid[ligne-1][colonne-1] == 1 && IsInRange(ligne-1, colonne-1) == 1){
     voisin += 1;
   }
-  if(grid[ligne-1][colonne] == 1 && IsInRange(ligne-1, colonne) ==1){
+  if(grid[ligne-1][colonne] == 1 && IsInRange(ligne-1, colonne) == 1){
     voisin += 1;
   }
   if(grid[ligne-1][colonne+1] == 1 && IsInRange(ligne-1, colonne+1) == 1){
@@ -86,9 +89,11 @@ void UpdateGame(void){
     for(int j=0; j<WIDTH; j++){
       int voisin = NbCasseAdj(i, j);
       if(grid[i][j] == 1 && voisin > 1 && voisin <4){
-        grid2[i][j] = 1;}
+        grid2[i][j] = 1;
+        break;}
       if(grid[i][j] == 0 && voisin == 3){
-        grid2[i][j] = 1;}
+        grid2[i][j] = 1;
+        break;}
       else {
       grid2[i][j] = 0;}
     }
@@ -115,3 +120,4 @@ void PlayGame(void){
 int main(){
   PlayGame();
 }
+
