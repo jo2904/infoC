@@ -4,7 +4,7 @@
 int WIDTH =30, HEIGHT=30;
 int grid[30][30];
 
-
+//MENU UTILISATEUR return numéro du motif
 int initGame(void){
   int motif;
   printf("Quel motif de départ ?\n");
@@ -13,6 +13,7 @@ int initGame(void){
   return motif;
 }
 
+//place les cellules initiales en fonction du motif 
 int loadGame(int motif){
   if(motif == 1){
     grid[HEIGHT/2][WIDTH/2] = 1;
@@ -20,10 +21,29 @@ int loadGame(int motif){
     grid[HEIGHT/2][(WIDTH/2)+2] = 1;
     return 1;
   }
+  if(motif == 2){
+    grid[HEIGHT/2][WIDTH/2] = 1;
+    grid[HEIGHT/2][(WIDTH/2)+1] = 1;
+    grid[HEIGHT/2][(WIDTH/2)+2] = 1;
+    grid[(HEIGHT/2)-1][WIDTH/2] = 1;
+    grid[(HEIGHT/2)-2][WIDTH/2] = 1;
+    grid[(HEIGHT/2)-1][WIDTH/2+2] = 1;
+    grid[(HEIGHT/2)-2][WIDTH/2+2] = 1;
+    return 1;
+  }
+  if(motif == 3){
+    grid[HEIGHT/2][WIDTH/2] = 1;
+    grid[HEIGHT/2][(WIDTH/2)+1] = 1;
+    grid[HEIGHT/2][(WIDTH/2)+2] = 1;
+    grid[(HEIGHT/2)+1][(WIDTH/2)+1] = 1;
+    grid[(HEIGHT/2)+2][WIDTH/2] = 1;
+    return 1;
+  }
   else
     return 0;
 }
 
+//dessine la grille 
 void drawGame(void){
     //system("clear");
     printf("\n");
@@ -46,6 +66,7 @@ void drawGame(void){
     }
 }
 
+//Confirme l'existance de la case
 int IsInRange( int ligne, int colonne){
     if(ligne > 0 && ligne < HEIGHT && colonne > 0 && colonne < WIDTH)
       return 1;
@@ -53,6 +74,7 @@ int IsInRange( int ligne, int colonne){
       return 0;
 }
 
+//compte le nombre de voisin
 int NbCasseAdj(int ligne, int colonne){
   int voisin = 0;
   //calcul du nombre de voisin
@@ -83,6 +105,7 @@ int NbCasseAdj(int ligne, int colonne){
   return voisin;
 }
 
+//récupere nombre de voisin et transforme la grille
 void UpdateGame(void){
   char grid2[HEIGHT][WIDTH];
   for(int i=0; i<HEIGHT; i++){
@@ -120,4 +143,3 @@ void PlayGame(void){
 int main(){
   PlayGame();
 }
-
