@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int WIDTH =30, HEIGHT=30;
-int grid[30][30];
+int WIDTH =50, HEIGHT=50;
+int grid[50][50];
 
 //MENU UTILISATEUR return numéro du motif
 int initGame(void){
@@ -112,18 +112,20 @@ void UpdateGame(void){
     for(int j=0; j<WIDTH; j++){
       int voisin = NbCasseAdj(i, j);
       if(grid[i][j] == 1 && voisin > 1 && voisin <4){
-        grid2[i][j] = 1;
-        break;}
-      if(grid[i][j] == 0 && voisin == 3){
-        grid2[i][j] = 1;
-        break;}
+        grid2[i][j] = 1; //1
+        }
+      else if(grid[i][j] == 0 && voisin == 3){
+        grid2[i][j] = 1; //1
+        }
       else {
-      grid2[i][j] = 0;}
+      grid2[i][j] = 0;
+      }//0
     }
   }
   for(int i=0; i<HEIGHT; i++){
-    for(int j=0; j<WIDTH; j++)
+    for(int j=0; j<WIDTH; j++){
       grid[i][j] = grid2[i][j];
+    }
   }
 
   }
