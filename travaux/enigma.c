@@ -18,7 +18,9 @@ int Encrypt(char lettre){
   chiffre = (rotor[1][chiffre + 25 - decallage[1] ])- 25 + decallage[1];
   chiffre = (rotor[2][chiffre + 25 - decallage[2] ])- 25 + decallage[2];
 
-  chiffre = reflector[chiffre];
+  chiffre = reflector[chiffre]; //reflector
+  
+   chiffre = connexions[chiffre] - 97; //passage par cable
 
   decallage[0]++;             //decallage rotor
   if( decallage[0] == 26){
