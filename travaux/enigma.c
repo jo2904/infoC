@@ -4,20 +4,19 @@
 
 char connexions[26] = "abcdefghijklmnopqrstuvwxyz";
 char textRotor[3][26] = {{"EKMFLGDQVZNTOWYHXUSPAIBRCJ"}, {"AJDKSIRUXBLHWTMCQGZNPYFVOE"},{"BDFHJLCPRTXVZNYEIWGAKMUSQO"}};
-char textReflector[26] = "EJMZALYXVBWFCRQUONTSPIKHGD"
+char textReflector[26] = "EJMZALYXVBWFCRQUONTSPIKHGD";
 int rotor[3][26];
 int reflector[26];
 int decallage[3] = {0,0,0};
 
 int Encrypt(char lettre){
-  int chiffre = lettre-97; //transfo en chiffre
-  chiffre = connexions[chiffre]-97; //passage par cable
+  int chiffre = lettre - 97; //transfo en chiffre
+  printf("%d ", chiffre);
+  chiffre = connexions[chiffre] - 97; //passage par cable
 
-  chiffre = rotor[0][chiffre+25-decallage[0]]-25+decallage[0];
-  chiffre = rotor[1][chiffre+25-decallage[1]]-25+decallage[1];
-  chiffre = rotor[2][chiffre+25-decallage[2]]-25+decallage[2];
-
-
+  chiffre = (rotor[0][chiffre + 25 - decallage[0] ])- 25 + decallage[0];
+  chiffre = (rotor[1][chiffre + 25 - decallage[1] ])- 25 + decallage[1];
+  chiffre = (rotor[2][chiffre + 25 - decallage[2] ])- 25 + decallage[2];
 
 
   decallage[0]++;             //decallage rotor
@@ -42,7 +41,7 @@ void Text2Value(){
       }
   }
   for(int i =0; i<26; i++){
-    reflector[i] = textReflector[i]-65
+    reflector[i] = textReflector[i]-65;
   }
 }
 
@@ -53,6 +52,11 @@ void ConnectCables(){
     diff =0;
     printf("Cables à inversés:\n ex: abcdefghijkl\n");
     scanf("%12s", test);
+    if(strlen(test) != 12){
+      printf("! il n'y a pas assez de caractères !\n");
+      diff ++;
+      }
+    else{
     for(int i=0; i<12; i++){
       for(int j =0; j<12; j++){
         if(test[i] == test[j] && i!=j){
@@ -61,11 +65,13 @@ void ConnectCables(){
         }
       }
     }
+    }
   }while (diff != 0);
   for(int i=0; i<12; i=i+2){
     connexions[test[i]-97] = test[i+1];
     connexions[test[i+1]-97] = test[i];
   }
+  printf("Les cables ont bien été inversé \n");
 }
 
 int main() {
@@ -74,8 +80,10 @@ int main() {
 
   ConnectCables();
   Text2Value();
+
+  printf("chiffrement du message en cours\n");
   for(int h = 0; h<taille; h++){
-    printf("%c ", Encrypt(string[h])+97);
+    printf("%d ", Encrypt(string[h]));
   }
 
   return 0;
