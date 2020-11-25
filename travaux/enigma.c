@@ -14,10 +14,11 @@ int Encrypt(char lettre){
   printf("%d ", chiffre);
   chiffre = connexions[chiffre] - 97; //passage par cable
 
-  chiffre = (rotor[0][chiffre + 25 - decallage[0] ])- 25 + decallage[0];
+  chiffre = (rotor[0][chiffre + 25 - decallage[0] ])- 25 + decallage[0]; // les 3 rotors
   chiffre = (rotor[1][chiffre + 25 - decallage[1] ])- 25 + decallage[1];
   chiffre = (rotor[2][chiffre + 25 - decallage[2] ])- 25 + decallage[2];
 
+  chiffre = reflector[chiffre];
 
   decallage[0]++;             //decallage rotor
   if( decallage[0] == 26){
