@@ -9,8 +9,9 @@ int taille(int tableau[]){
 }
 
 void tri_bulle(int tableau[]){
-  for(int i = 0; i<taille(tableau); i++){
-      for(int j =0; j<taille(tableau); j++){
+  int n = taille(tableau);
+  for(int i = 0; i<n; i++){
+      for(int j =0; j<n; j++){
        if(tableau[j] > tableau[j+1]){
          int temp = tableau[j];
           tableau[j] = tableau[j+1];
@@ -20,28 +21,32 @@ void tri_bulle(int tableau[]){
    }
 }
 
-void tri_select(int tableau[]){
-  for(int i = 0; i < taille(tableau); i++){
-    int temp = tableau[i];
-    int temp2 = i;
-    for(int j = i+1; j < taille(tableau); j++){
-      if(temp > tableau[j]){
-        temp = tableau[j];
-        temp2 = j;
-      }
-      tableau[j] = tableau[i];
-      tableau[i] = temp;     
+void triSelection (int tableau[]){
+  int n = taille(tableau);
+    for(int i = 0; i < n; i++){
+        int tmp = i;
+        for(int j = i; j < n; j++){
+            if(tableau[tmp] > tableau[j]){
+                tmp = j;
+            }
+        }
+        if(tmp != i){
+            int var = tableau[i];
+            tableau[i] = tableau[tmp];
+            tableau[tmp] = var;
+        }
     }
-  }
 }
-
-void tri_insertion(int taleau){
-  
-
-int main(){
-  int tableau[9] = {4,2,5,3,1,9,8,6,7};
-  tri_select(tableau);
-  for(int i =0; i<taille(tableau); i++){
-    printf("%d", tableau[i]);
-  }
+int triInsertion(int tableau[]){
+  int n = taille(tableau);
+    int tmp;
+    for(int i = 1; i <n; i++){
+        int j = i;
+        while((j > 0) && (tableau[j-1] > tableau[j])){
+            tmp = tableau[j];
+            tableau[j] = tableau[j-1];
+            tableau[j-1] = tmp;
+            j--;
+        }
+    }
 }
