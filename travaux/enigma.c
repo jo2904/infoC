@@ -11,24 +11,16 @@ int invRotor[3][26];
 int shift[3] = {0,0,0};
 
 int passagerotor(int chiffre, int shift, int n){
-
   chiffre = (chiffre - shift + 26)%26;
-
   chiffre = rotor[n][chiffre];
-
   chiffre = (chiffre + shift)%26;
-
   return chiffre;
 }
 
 int inverserotor(int chiffre, int shift, int n){
-
   chiffre = (chiffre - shift + 26)%26;
-
   chiffre = invRotor[n][chiffre];
-
   chiffre = (chiffre + shift)%26;
-
   return chiffre;
 }
 
@@ -36,7 +28,7 @@ int Encrypt(char lettre){
   int a, b;
   int chiffre;
 
-  if((lettre - 'a' < 0) && (lettre - 'a' > 25)){
+  if((lettre - 'a' < 0) || (lettre - 'a' > 25)){
     chiffre = lettre - 'A';
   }
   else{
@@ -84,6 +76,15 @@ void Text2Value(){    //création des matrices rotor et reflector en chiffre
   }
 }
 
+void InitCle(){
+  char string[3];
+  printf("\nClé des rotors: \nex: abc\n");
+  scanf("%s", string);
+  for(int i =0; i < 3; i++){
+    shift[i] = string[i] -'a';
+  }
+}
+
 void GenerateInvPerm(){   //création de rotor inverse
   for(int i =0; i<3; i++){
     for(int j=0; j<26; j++){
@@ -101,7 +102,7 @@ void ConnectCables(){   //on récupère une chaine et on inverse deux par deux l
   int diff = 0;
   do{
     diff =0;
-    printf("Cables à inversés:\n ex: abcdefghijkl\n");
+    printf("\nCables à inversés:\n ex: abcdefghijkl\n");
     scanf("%12s", test);
     if(strlen(test) != 12){
       printf("! il n'y a pas assez de caractères !\n");
@@ -131,13 +132,14 @@ int main() {
   scanf("%100s", string);
   int taille = strlen(string);
 
+  InitCle();
   ConnectCables();
   Text2Value();
   GenerateInvPerm();
 
-  printf("chiffrement du message en cours\n");
+  printf("\nchiffrement du message en cours\n");
   for(int h = 0; h<taille; h++){
-    printf("%c ", Encrypt(string[h])+ 'A');
+    printf("%c", Encrypt(string[h])+ 'a');
   }
   printf("\n");
 
