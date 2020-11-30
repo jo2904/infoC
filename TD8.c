@@ -35,6 +35,9 @@ void tri_select(int tableau[]){
   }
 }
 
+void tri_insertion(int taleau){
+  
+
 int main(){
   int tableau[9] = {4,2,5,3,1,9,8,6,7};
   tri_select(tableau);
