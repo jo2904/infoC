@@ -30,11 +30,36 @@ int partition(int *tableau, int deb, int fin){
     if(pivot == j){
       i++;
     }
-    return pivot;
   }
-  
-void tri_rapide(int *tableau, int deb, int fin){
+  return pivot;
+}
+
+void tri_rapide2(int *tableau, int deb, int fin){
     int pivot = partition(tableau, deb, fin);
+
+    tri_rapide2(tableau, deb, pivot-1);
+    tri_rapide2(tableau, pivot+1, fin);
+
+}
+
+void tri_rapide(int *tableau, int deb, int fin){
+  int pivot, i, j;
+  pivot = deb;
+  i = deb;
+  j = fin;
+
+  while(i<j){
+    if(tableau[j] < tableau[i]){
+      int temp = tableau[i];
+      tableau[i] = tableau[j];
+      tableau[j] = temp;
+    }
+    if(pivot == i){
+      j--;
+    }
+    if(pivot == j){
+      i++;
+    }
 
     tri_rapide(tableau, deb, pivot-1);
     tri_rapide(tableau, pivot+1, fin);
@@ -43,12 +68,12 @@ void tri_rapide(int *tableau, int deb, int fin){
 
 
 int main(){
-  int tableau[] = {4, 1, 2, 5, 6, 3, 7, 0};
+  int tableau[] = {4, 11, 8, 5, 6, 2, 1, 0};
   for(int i = 0; i<8; i++){
     printf("%d ", tableau[i]);
   }
   printf("\n" );
-  
+
   tri_rapide(tableau, 0, taille(tableau));
 
   for(int i = 0; i<8; i++){
