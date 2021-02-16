@@ -12,36 +12,6 @@ int taille(int tableau[]){
   return i;
 }
 
-int partition(int *tableau, int deb, int fin){
-  int pivot, i, j;
-  pivot = deb;
-  i = deb;
-  j = fin;
-
-  while(i<j){
-    if(tableau[j] < tableau[i]){
-      int temp = tableau[i];
-      tableau[i] = tableau[j];
-      tableau[j] = temp;
-    }
-    if(pivot == i){
-      j--;
-    }
-    if(pivot == j){
-      i++;
-    }
-  }
-  return pivot;
-}
-
-void tri_rapide2(int *tableau, int deb, int fin){
-    int pivot = partition(tableau, deb, fin);
-
-    tri_rapide2(tableau, deb, pivot-1);
-    tri_rapide2(tableau, pivot+1, fin);
-
-}
-
 void tri_rapide(int *tableau, int deb, int fin){
   int pivot, i, j;
   pivot = deb;
