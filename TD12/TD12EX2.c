@@ -12,7 +12,7 @@ int taille(int tableau[]){
   return i;
 }
 
-void tri_rapide(int *tableau, int deb, int fin){
+int partition(int *tableau, int deb, int fin){
   int pivot, i, j;
   pivot = deb;
   i = deb;
@@ -30,6 +30,11 @@ void tri_rapide(int *tableau, int deb, int fin){
     if(pivot == j){
       i++;
     }
+    return pivot;
+  }
+  
+void tri_rapide(int *tableau, int deb, int fin){
+    int pivot = partition(tableau, deb, fin);
 
     tri_rapide(tableau, deb, pivot-1);
     tri_rapide(tableau, pivot+1, fin);
