@@ -37,7 +37,7 @@ int main(){
   }
   free(tab);
 
-  int Ligne = 4, Colonne = 5, **tab2;
+  int Ligne = 5, Colonne = 6, **tab2;
   tab2 = AllocMat(Ligne, Colonne);
   RandMat(tab2, Ligne, Colonne, 0, 10);
   for(int i =0; i<Ligne; i++){

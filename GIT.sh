@@ -1,4 +1,3 @@
-git status 
 git add .
 git commit -m "MAJ"
-git push
+git push origin master
