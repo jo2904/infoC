@@ -11,6 +11,7 @@ int main(int argc, char const *argv[]){
 	FILE * fichier = NULL; // def fichier
 	fichier = fopen(argv[1], "r");
 	if (fichier == NULL){ // si fichier pas ouvert
+		printf("Veuillez donner un fichier\n");
 		return -1;
 	}
 	fscanf(fichier, "%d %d", &ligne, &colonne); // on recup ligne et colonne
