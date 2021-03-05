@@ -22,6 +22,7 @@ int main(int argc, char const *argv[]) {
   fread(temp, 1, taille_fichier, fichier1);
   fwrite(temp, 1, taille_fichier, fichier2);
 
+  free(temp);
   fclose(fichier1);
   fclose(fichier2);
   return 0;
