@@ -4,8 +4,6 @@
 #include "matrice.h"
 #include "gauss.h"
 
-
-
 int main(int argc, char const *argv[]){
 	int ligne, colonne; //def variable
 
@@ -17,14 +15,18 @@ int main(int argc, char const *argv[]){
 	}
 	fscanf(fichier, "%d %d", &ligne, &colonne); // on recup ligne et colonne
 
-	int ** matrice = lireMatrice(fichier , ligne, colonne); //def matrice
+  int ** matrice = lireMatrice(fichier , ligne, colonne); //def matrice
 
-	//gaussManuel (matrice, ligne , colonne);
-	gaussAuto (matrice, ligne , colonne);
+	printf("Matrice init:\n");
+  affMat(matrice, ligne, colonne);
 
+  gaussAuto(matrice, ligne, colonne);
 
+	printf("Matrice fin:\n");
+  affMat(matrice, ligne, colonne);
 
+	printf("Solution:\n");
+	affSol(matrice, ligne, colonne);
 
-
-	free(matrice);
+  free(matrice);
 }
