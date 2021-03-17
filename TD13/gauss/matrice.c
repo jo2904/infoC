@@ -31,6 +31,7 @@ int **  lireMatrice(FILE * fichier, int ligne, int colonne){
     fscanf(fichier, "\n");
     printf("\n" );
 	}
+  printf("\n");
   fclose(fichier);
 	return matrice;
 }

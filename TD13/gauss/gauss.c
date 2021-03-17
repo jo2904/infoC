@@ -22,7 +22,7 @@ int transposition (int *l1, int *l2, int n){
 
 int dilatation (int *l, int n, int lambda){
   for(int i = 0; i<n; i++){
-    l[i] = l[i] * lambda;
+    l[i] = l[i] * 1/lambda;
   }
   return 1;
 }
@@ -76,31 +76,46 @@ int gaussManuel (int ** matrice, int ligne , int colonne){
   return 1;
 }
 
-int gaussAuto (int ** matrice, int ligne , int colonne){
-  int L = 0;
+int gaussAuto (int **matrice, int ligne, int colonne){
+	int LigneSelect = -1;
+	int ColonneSelect = -1;
+	int pivot = -1;
+	for(int i = 0; i< ligne; i++){
+		//recherche ligne avec le moins de zéro
+		for(int j = 0; j <colonne; j++){
+			for(int h =i; h <ligne; h++){
+				if(matrice[h][j] != 0){
+					LigneSelect = h;
+					break;
+				}
+			}
+		}
+		//echange ligne select et ligne i
+		printf("echange ligne %d et ligne %d\n", i, LigneSelect);
+		transposition(matrice[i], matrice[LigneSelect], colonne);
+		affMat(matrice, ligne, colonne);
 
-  for(int j = L; j < colonne-1; j++){
-    int e = 0;
-    int indice;
+		//select pivot
+		for(int j = 0; j < colonne; j++){
+			if(matrice[i][j] != 0){
+				pivot = matrice [i][j];
+				ColonneSelect = j;
+				printf("%d\n", pivot );
+				break;
+			}
+		}
 
-    for(int i = L; i < ligne; i++){ //recherche de e
-      if(matrice[i][j] != 0){
-        e = matrice[i][j];
-        indice = i;
-        break;
-      }
-    }
+		//divise ligne i par pivot
+		printf("on divise la ligne %d par %d\n", i, pivot);
+		dilatation(matrice[i], colonne, pivot);
+		affMat(matrice, ligne, colonne);
 
-    if(e != 0){
+		//simplification
+		for(int j  = i+1; j <ligne; j++){
+			printf("la ligne %d devient L%d + %d * L%d\n", j, j, -matrice[j][ColonneSelect] , i);
+			transvection(matrice[j], matrice[i], colonne, -matrice[j][ColonneSelect]);
+		}
+		affMat(matrice, ligne, colonne);
 
-      transposition(matrice[indice], matrice[L], colonne);
-
-      for(int i = L+1; i < ligne-1; i++){
-        transvection(matrice[i], matrice[L], colonne, -matrice[i][j]/matrice[L][j]);
-      }
-      L++;
-      affMat(matrice, ligne, colonne);
-    }
-
-  }
+	}
 }
