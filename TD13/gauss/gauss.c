@@ -91,7 +91,7 @@ int gaussAuto (int **matrice, int ligne, int colonne){
 			}
 		}
 		//echange ligne select et ligne i
-		printf("echange ligne %d et ligne %d\n", i, LigneSelect);
+		printf("echange ligne %d et ligne %d\n", i+1, LigneSelect+1);
 		transposition(matrice[i], matrice[LigneSelect], colonne);
 		affMat(matrice, ligne, colonne);
 
@@ -100,19 +100,18 @@ int gaussAuto (int **matrice, int ligne, int colonne){
 			if(matrice[i][j] != 0){
 				pivot = matrice [i][j];
 				ColonneSelect = j;
-				printf("%d\n", pivot );
 				break;
 			}
 		}
 
 		//divise ligne i par pivot
-		printf("on divise la ligne %d par %d\n", i, pivot);
+		printf("on divise la ligne %d par %d\n", i+1, pivot);
 		dilatation(matrice[i], colonne, pivot);
 		affMat(matrice, ligne, colonne);
 
 		//simplification
 		for(int j  = i+1; j <ligne; j++){
-			printf("la ligne %d devient L%d + %d * L%d\n", j, j, -matrice[j][ColonneSelect] , i);
+			printf("la ligne %d devient L%d + %d * L%d\n", j+1, j+1, -matrice[j][ColonneSelect] , i);
 			transvection(matrice[j], matrice[i], colonne, -matrice[j][ColonneSelect]);
 		}
 		affMat(matrice, ligne, colonne);
