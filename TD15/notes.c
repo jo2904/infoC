@@ -14,7 +14,7 @@ void afficheEtudiant(Etudiant etu)
 
 void afficheEtudiantCompact(Etudiant etu)
 {
-	printf("%10s, %18s, %02.2f, %02.2f, %02.2f, %02.2f, %2d\n", 
+	printf("%10s, %18s, %02.2f, %02.2f, %02.2f, %02.2f, %2d\n",
 		etu.nom, etu.prenom, etu.notes[0], etu.notes[1], etu.notes[2], etu.moy, etu.credits);
 }
 
@@ -39,9 +39,9 @@ Etudiant *lireFichier (char *path, int *p_size)
 		return NULL;
 	}
 
-	// Recuperation du nombre d'étudiants
+	// Recuperation du nombre d'ï¿½tudiants
 	do
-	{ 
+	{
 		c = fgetc(pfile);
 		if (c == '\n')
 			count++;
@@ -52,7 +52,7 @@ Etudiant *lireFichier (char *path, int *p_size)
 	// Allocation du tableau d'etudiants
 	tab = (Etudiant*)calloc(count, sizeof(Etudiant));
 
-	// Lecture de la première ligne
+	// Lecture de la premiï¿½re ligne
 	do
 	{
 		c = fgetc(pfile);
@@ -61,7 +61,7 @@ Etudiant *lireFichier (char *path, int *p_size)
 	// Lecture complete du fichier de notes et calcul des moyennes
 	for (i = 0; i <= count; i++)
 	{
-		fscanf(pfile, "%s %s %f %f %f\n", 
+		fscanf(pfile, "%s %s %f %f %f\n",
 			tab[i].nom, tab[i].prenom, tab[i].notes, tab[i].notes+1, tab[i].notes+2);
 		tab[i].moy = (tab[i].notes[0] * 12.f + tab[i].notes[1] * 10.f + tab[i].notes[2] * 8.f) / 30.f;
 		tab[i].credits += (tab[i].notes[0] >= 10 ? 12 : 0);
@@ -70,6 +70,8 @@ Etudiant *lireFichier (char *path, int *p_size)
 	}
 
 	*p_size = count;
+
+	fclose(pfile);
 	return tab;
 }
 
@@ -89,6 +91,9 @@ int triInsertion (void *tab, int type_size, int length, int (*f_comp)(void*, voi
 		}
 		memcpy((char*)tab + j*type_size, tmp, type_size);
 	}
+
+
+	free(tmp);
 	return 0;
 }
 
@@ -188,8 +193,8 @@ int main (int argc, char **argv)
 		printf("Usage: prog.exe <fichier CSV>\n");
 		return EXIT_FAILURE;
 	}
-	tab = lireFichier(argv[1], &size); 
-	printf("Liste non triée : %d étudiants\n", size);
+	tab = lireFichier(argv[1], &size);
+	printf("Liste non triï¿½e : %d ï¿½tudiants\n", size);
 	for (i = 0; i < size; i++)
 		afficheEtudiantCompact(tab[i]);
 	printf("\n----------------------------\n");
@@ -206,7 +211,7 @@ int main (int argc, char **argv)
 
     f_comp = compareCredits;
 	triInsertion(tab, sizeof(Etudiant), size, f_comp);
-	printf("Les 3 qui vont économiser de l'argent:\n");
+	printf("Les 3 qui vont ï¿½conomiser de l'argent:\n");
 	for (i = size; i>size-3; i--)
 		printf("%s ", tab[i].nom);
 	printf("\n----------------------------\n");
@@ -219,5 +224,7 @@ int main (int argc, char **argv)
 	for (i = 0; i < 2; i++)
 		afficheEtudiantCompact(tab[i]);
 	printf("\n");
+
+	free(tab);
 	return 0;
 }
