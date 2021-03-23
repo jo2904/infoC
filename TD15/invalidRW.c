@@ -209,7 +209,7 @@ ARGS: void
 int update_game ( void )
 {
 	int ligne, colonne; // Variables de boucle
-	char **plateau_tmp = (char **)calloc(HEIGHT, sizeof(char));
+	char **plateau_tmp = (char **)calloc(HEIGHT, sizeof(char*));
 	for (ligne=0; ligne<HEIGHT; ligne++)
 		plateau_tmp[ligne] = (char*)calloc(WIDTH, sizeof(char));
 
