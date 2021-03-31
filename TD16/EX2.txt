@@ -1,0 +1,13 @@
+temps = 30
+QI = 0
+
+tableau = numero|ingrédient|QI|temps
+
+trier les ingrédients par QI
+i = 0
+tant que j'ai du temps
+	si on a le temps de manger ingredient i
+		QI = QI + QI_de_l'ingrédient
+		temps = temps - temps_de_le_manger
+	sinon on test le suivant
+		i++

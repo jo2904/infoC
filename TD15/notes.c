@@ -39,7 +39,7 @@ Etudiant *lireFichier (char *path, int *p_size)
 		return NULL;
 	}
 
-	// Recuperation du nombre d'�tudiants
+	// Recuperation du nombre d'etudiants
 	do
 	{
 		c = fgetc(pfile);
@@ -52,17 +52,16 @@ Etudiant *lireFichier (char *path, int *p_size)
 	// Allocation du tableau d'etudiants
 	tab = (Etudiant*)calloc(count, sizeof(Etudiant));
 
-	// Lecture de la premi�re ligne
+	// Lecture de la premiere ligne
 	do
 	{
 		c = fgetc(pfile);
 	}while ((c != EOF) && (c != '\n'));
 
 	// Lecture complete du fichier de notes et calcul des moyennes
-	for (i = 0; i <= count; i++)
+	for (i = 0; i < count; i++)
 	{
-		fscanf(pfile, "%s %s %f %f %f\n",
-			tab[i].nom, tab[i].prenom, tab[i].notes, tab[i].notes+1, tab[i].notes+2);
+		fscanf(pfile, "%s %s %f %f %f\n",	tab[i].nom, tab[i].prenom, tab[i].notes, tab[i].notes+1, tab[i].notes+2);
 		tab[i].moy = (tab[i].notes[0] * 12.f + tab[i].notes[1] * 10.f + tab[i].notes[2] * 8.f) / 30.f;
 		tab[i].credits += (tab[i].notes[0] >= 10 ? 12 : 0);
 		tab[i].credits += (tab[i].notes[1] >= 10 ? 10 : 0);
@@ -194,7 +193,7 @@ int main (int argc, char **argv)
 		return EXIT_FAILURE;
 	}
 	tab = lireFichier(argv[1], &size);
-	printf("Liste non tri�e : %d �tudiants\n", size);
+	printf("Liste non triee : %d etudiants\n", size);
 	for (i = 0; i < size; i++)
 		afficheEtudiantCompact(tab[i]);
 	printf("\n----------------------------\n");
@@ -211,7 +210,7 @@ int main (int argc, char **argv)
 
     f_comp = compareCredits;
 	triInsertion(tab, sizeof(Etudiant), size, f_comp);
-	printf("Les 3 qui vont �conomiser de l'argent:\n");
+	printf("Les 3 qui vont economiser de l'argent:\n");
 	for (i = size; i>size-3; i--)
 		printf("%s ", tab[i].nom);
 	printf("\n----------------------------\n");

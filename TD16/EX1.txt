@@ -1,0 +1,9 @@
+euro = [50, 20, 10, 5, 2, 1, 0.5, 0.2, 0.1, 0.05, 0.01]
+pour i allant de 0 à taille de euro
+	si S = 0
+		fin du programme
+	x = 0
+	tant que ((j = S - euro[i]) >= 0)
+		x ++
+		S = j
+	print("On rend" x "fois" euro[i] "€")
