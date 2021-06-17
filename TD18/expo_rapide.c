@@ -9,10 +9,10 @@ int main() {
 
   while(e>0){
     if(e / 2 == 1){
-      res = res * g;
+      res = res * g%n;
     }
     g = g*g;
-    e = e/2;
+    e = e/2%n;
   }
 
   printf("%d\n", res);
