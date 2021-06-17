@@ -6,6 +6,7 @@
 int main() {
   int g = 1337, e = 73;
   int res = 1;
+  int n  =2;
 
   while(e>0){
     if(e / 2 == 1){
